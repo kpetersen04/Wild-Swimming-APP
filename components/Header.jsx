@@ -9,34 +9,30 @@ import { DEV_API_URL } from "../consts";
 
 const Header = () => {
   const [regionsData, setRegionsData] = useState([]);
+  const [isFirstClick, setIsFirstClick] = useState(true);
 
   const fetchData = async () => {
     try {
       const dbresponse = await axios.get(`${DEV_API_URL}/regions/`);
-      console.log(dbresponse);
+      const regionsInfo = dbresponse.data;
+      console.log(dbresponse.data);
+      setRegionsData(regionsInfo);
     } catch (err) {
       return err;
     }
   };
 
   const onClick = () => {
-    console.log("You clicked Browse by region.");
-    fetchData();
+    if (isFirstClick) {
+      fetchData();
+      setIsFirstClick(false);
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const regions = [
-    { name: "South West England", slug: "/sites-by-region" },
-    { name: "South East England", slug: "/sites-by-region" },
-    { name: "East England", slug: "/sites-by-region" },
-    { name: "Midlands and Central England", slug: "/sites-by-region" },
-    { name: "Northern England", slug: "/sites-by-region" },
-    { name: "Wales", slug: "/sites-by-region" },
-    { name: "Scotland", slug: "/sites-by-region" },
-  ];
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -53,9 +49,13 @@ const Header = () => {
               id="basic-nav-dropdown"
               onClick={onClick}
             >
-              {regions.map((link, idx) => (
-                <NavDropdown.Item as={Link} to={link.slug} key={idx}>
-                  {link.name}
+              {regionsData.map((region, idx) => (
+                <NavDropdown.Item
+                  as={Link}
+                  to={`/sites-by-region/${region.id}`}
+                  key={idx}
+                >
+                  {region.region_name}
                 </NavDropdown.Item>
               ))}
             </NavDropdown>

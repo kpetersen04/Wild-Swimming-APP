@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/sites-by-region" element={<SitesByRegion />} />
+        <Route path="/sites-by-region/:id" element={<SitesByRegion />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
       </Routes>

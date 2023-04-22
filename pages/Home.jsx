@@ -7,7 +7,6 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const dbresponse = await axios.get("http://127.0.0.1:8000/regions/");
         const dbresponse = await axios.get(`${DEV_API_URL}/regions/`);
         console.log(dbresponse);
       } catch (err) {
