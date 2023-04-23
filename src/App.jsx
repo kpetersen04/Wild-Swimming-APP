@@ -6,6 +6,7 @@ import SitesByRegion from "../pages/SitesByRegion";
 import About from "../pages/About";
 import SignIn from "../pages/SignIn";
 import Register from "../pages/Register";
+import SingleSwimSite from "../pages/SingleSwimSite";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/sites-by-region/:id" element={<SitesByRegion />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/swim-sites/:id" element={<SingleSwimSite />} />
       </Routes>
     </div>
   );

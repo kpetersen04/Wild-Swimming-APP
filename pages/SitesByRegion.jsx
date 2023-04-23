@@ -50,10 +50,10 @@ const SitesByRegion = () => {
               region,
             }) => {
               return (
-                <li>
+                <li key={id}>
                   <SwimSiteCard
                     description={description}
-                    swimSiteId={id}
+                    swimSitesId={id}
                     image={image}
                     name={name}
                     parkingInfo={parking_info}
