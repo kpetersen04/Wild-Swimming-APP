@@ -1,5 +1,74 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { DEV_API_URL } from "../consts";
+// import SwimSiteCard from "../components/SwimSiteCard";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import SwimSiteCard from "../components/SwimSiteCard";
+
 const SitesByRegion = () => {
-  return <h1>This is the page for region specfic sites.</h1>;
+  const { id } = useParams();
+  const [swimSites, setSwimSites] = useState();
+  const [region, setRegion] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DEV_API_URL}/regions/${id}`);
+        console.log(data);
+        const region = data.region_name;
+        console.log(region);
+        const swimSites = data.swim_sites;
+        console.log(swimSites);
+        setSwimSites(swimSites);
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <h1>This is the region:</h1>
+      {isLoading ? (
+        <p>Loading..</p>
+      ) : (
+        <ul className="card-container">
+          {swimSites.map(
+            ({
+              description,
+              id,
+              image,
+              location,
+              name,
+              parking_info,
+              postcode,
+              region,
+            }) => {
+              return (
+                <li>
+                  <SwimSiteCard
+                    description={description}
+                    swimSiteId={id}
+                    image={image}
+                    name={name}
+                    parkingInfo={parking_info}
+                    postcode={postcode}
+                    region={region}
+                    location={location}
+                  />
+                </li>
+              );
+            }
+          )}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default SitesByRegion;

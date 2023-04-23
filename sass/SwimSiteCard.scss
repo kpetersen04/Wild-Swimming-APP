@@ -1,0 +1,14 @@
+.card-container {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  .card {
+    margin: 1.25rem;
+  }
+  .card-img-top {
+    height: 230px;
+  }
+}

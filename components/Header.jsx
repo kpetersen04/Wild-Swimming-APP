@@ -9,7 +9,7 @@ import { DEV_API_URL } from "../consts";
 
 const Header = () => {
   const [regionsData, setRegionsData] = useState([]);
-  const [isFirstClick, setIsFirstClick] = useState(true);
+  // const [isFirstClick, setIsFirstClick] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -23,10 +23,10 @@ const Header = () => {
   };
 
   const onClick = () => {
-    if (isFirstClick) {
-      fetchData();
-      setIsFirstClick(false);
-    }
+    // if (isFirstClick) {
+    fetchData();
+    // setIsFirstClick(false);
+    // }
   };
 
   useEffect(() => {
