@@ -1,7 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState, useEffect } from "react";
-import SignIn from "../pages/SignIn";
 import { DEV_API_URL } from "../consts";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -12,9 +11,12 @@ const SignInForm = () => {
     email: "",
     password: "",
   });
+  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const onChange = (e) => {
-    console.log(e.target.value);
+    setShowError(false);
     setSignInForm({ ...signInForm, [e.target.name]: e.target.value });
   };
 
@@ -25,11 +27,13 @@ const SignInForm = () => {
         `${DEV_API_URL}/auth/login/`,
         signInForm
       );
-      console.log(data);
       localStorage.setItem("token", data.token);
+      setIsLoggedIn(true);
       navigate("/");
     } catch (err) {
-      console.log(err);
+      setShowError(true);
+      const { response } = err;
+      setError(response.data.detail);
     }
   };
 
@@ -56,6 +60,7 @@ const SignInForm = () => {
           name="password"
         />
       </Form.Group>
+      {showError && <p>{error}</p>}
       <Button variant="primary" type="submit">
         Sign In
       </Button>
