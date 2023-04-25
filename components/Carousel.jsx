@@ -9,10 +9,9 @@ const SwimSiteCarousel = () => {
           src="holder.js/800x400?text=First slide&bg=373940"
           alt="First slide"
         />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Here is some text for the first item.</p>
-        </Carousel.Caption>
+
+        <h3>First slide label</h3>
+        <p>Here is some text for the first item.</p>
       </Carousel.Item>
       <Carousel.Item>
         <img
@@ -21,10 +20,8 @@ const SwimSiteCarousel = () => {
           alt="Second slide"
         />
 
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
+        <h3>Second slide label</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </Carousel.Item>
       <Carousel.Item>
         <img
@@ -33,12 +30,8 @@ const SwimSiteCarousel = () => {
           alt="Third slide"
         />
 
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
+        <h3>Third slide label</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
       </Carousel.Item>
     </Carousel>
   );
