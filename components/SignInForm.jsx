@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DEV_API_URL } from "../consts";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
