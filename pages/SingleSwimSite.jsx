@@ -20,6 +20,7 @@ const SingleSwimSite = () => {
     createdBy: "",
   };
   const [commentToAdd, setCommentToAdd] = useState(commentData);
+  const token = localStorage.getItem("token");
 
   const fetchData = async () => {
     try {
@@ -124,6 +125,7 @@ const SingleSwimSite = () => {
                   firstName={first_name}
                   lastName={last_name}
                   commentPosted={created_at}
+                  token={token}
                 />
               </li>
             );
