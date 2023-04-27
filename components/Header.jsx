@@ -9,7 +9,7 @@ import { DEV_API_URL } from "../consts";
 
 const Header = () => {
   const [regionsData, setRegionsData] = useState([]);
-  // const [isFirstClick, setIsFirstClick] = useState(true);
+  const [isFirstClick, setIsFirstClick] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -22,16 +22,13 @@ const Header = () => {
     }
   };
 
-  const onClick = () => {
-    // if (isFirstClick) {
-    fetchData();
-    // setIsFirstClick(false);
-    // }
-  };
-
   useEffect(() => {
     fetchData();
   }, []);
+
+  const onClick = () => {
+    fetchData();
+  };
 
   return (
     <>
@@ -54,6 +51,7 @@ const Header = () => {
                   as={Link}
                   to={`/sites-by-region/${region.id}`}
                   key={idx}
+                  // onClick={onClick}
                 >
                   {region.region_name}
                 </NavDropdown.Item>

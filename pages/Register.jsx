@@ -2,6 +2,7 @@ import RegisterForm from "../components/RegisterForm";
 import { useState } from "react";
 import axios from "axios";
 import { DEV_API_URL } from "../consts";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [registerFormData, setRegisterFormData] = useState({
@@ -15,6 +16,7 @@ const Register = () => {
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     console.log(e.target.value);
@@ -34,6 +36,9 @@ const Register = () => {
         registerFormData
       );
       console.log(response);
+      if (response) {
+        navigate(`/sign-in/`);
+      }
     } catch (err) {
       console.log(err);
       // setShowError(true);
