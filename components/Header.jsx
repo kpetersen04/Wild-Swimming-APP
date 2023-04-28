@@ -42,7 +42,7 @@ const Header = () => {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark">
+      <Navbar sticky="top" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand as={Link} to={"/"}>
             Wild Swimming
@@ -71,12 +71,22 @@ const Header = () => {
           <Nav>
             {isLoggedIn ? (
               <>
-                <Nav.Link as={Link} to={`/my-account/${id}`}>
-                  My Account
-                </Nav.Link>
-                <Nav.Link as={Link} to={"/"} onClick={signOut}>
-                  Sign Out
-                </Nav.Link>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                    <NavDropdown title="My Account" id="basic-nav-dropdown">
+                      <NavDropdown.Item as={Link} to={`/my-account/${id}`}>
+                        My Prolife
+                      </NavDropdown.Item>
+                      <NavDropdown.Item>Change My Details</NavDropdown.Item>
+                      <NavDropdown.Item>Update My Password</NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item as={Link} to={"/"} onClick={signOut}>
+                        Sign Out
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
+                </Navbar.Collapse>
               </>
             ) : (
               <>
