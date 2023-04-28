@@ -12,6 +12,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
   const id = localStorage.getItem("userId");
+  // const [showDeleteButton, setShowDeleteButton] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -37,6 +38,7 @@ const Header = () => {
 
   const signOut = (e) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     setIsLoggedIn(false);
   };
 

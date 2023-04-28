@@ -11,14 +11,13 @@ const CommentCard = ({
   lastName,
   commentId,
   token,
+  isCommentOwner,
 }) => {
-  const [isCommentOwner, setIsCommentOwner] = useState(false);
+  console.log(`showDeleteButton? => ${isCommentOwner}`);
   const [showError, setShowError] = useState(false);
+  const [showDeleteButton, setShowDeleteButton] = useState(isCommentOwner);
+  console.log(showDeleteButton);
   const [error, setError] = useState("");
-
-  // const getCommentOwner = async () => {
-
-  // }
 
   const deleteComment = async (e) => {
     console.log("delete clicked");
@@ -65,7 +64,7 @@ const CommentCard = ({
           <Card.Title>
             {firstName} {lastName} says:{" "}
           </Card.Title>{" "}
-          {isCommentOwner && (
+          {showDeleteButton && (
             <Button variant="outline-danger" onClick={deleteComment}>
               x
             </Button>

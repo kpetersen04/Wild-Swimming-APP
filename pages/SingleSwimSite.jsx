@@ -11,16 +11,18 @@ const SingleSwimSite = () => {
   const { id } = useParams();
   const [swimSite, setSwimSite] = useState([]);
   const [comments, setComments] = useState([]);
-  // const [createdByArray, setCreatedByArray] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isAddCommentClicked, setIsAddCommentClicked] = useState(false);
+  // const [showDeleteButton, setShowDeleteButton] = useState(false);
   const commentData = {
     text: "",
     site: "",
     createdBy: "",
   };
   const [commentToAdd, setCommentToAdd] = useState(commentData);
+  // const [showDeleteButton, setShowDeleteButton] = useState(false);
   const token = localStorage.getItem("token");
+  const userId = parseInt(localStorage.getItem("userId"));
 
   const fetchData = async () => {
     try {
@@ -28,8 +30,9 @@ const SingleSwimSite = () => {
       console.log(data);
       setSwimSite(data);
       setComments(data.comments);
-      // setCreatedByArray(data.comments[0].created_by);
-      // console.log(data.comments[0].created_by);
+      setIsLoggedIn(token);
+
+      // setShowDeleteButton(isCommentOwner);
     } catch (err) {
       console.log(err);
     }
@@ -117,6 +120,8 @@ const SingleSwimSite = () => {
         <ul>
           {comments.map(({ id, text, created_at, created_by }) => {
             const { first_name, last_name } = created_by;
+            console.log(created_by.id);
+            console.log(userId);
             return (
               <li key={id}>
                 <CommentCard
@@ -126,6 +131,7 @@ const SingleSwimSite = () => {
                   lastName={last_name}
                   commentPosted={created_at}
                   token={token}
+                  isCommentOwner={created_by.id === userId}
                 />
               </li>
             );
