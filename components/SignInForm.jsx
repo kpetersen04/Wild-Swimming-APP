@@ -1,11 +1,12 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DEV_API_URL } from "../consts";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SignInForm = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const [signInForm, setSignInForm] = useState({
     email: "",
@@ -13,7 +14,6 @@ const SignInForm = () => {
   });
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const onChange = (e) => {
     setShowError(false);
@@ -33,6 +33,7 @@ const SignInForm = () => {
     } catch (err) {
       setShowError(true);
       const { response } = err;
+      console.log(err);
       setError(response.data.detail);
     }
   };
