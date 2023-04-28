@@ -12,13 +12,16 @@ const CommentCard = ({
   commentId,
   token,
 }) => {
-  const [isCommentOwner, setIsCommentOwner] = useState(true);
+  const [isCommentOwner, setIsCommentOwner] = useState(false);
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState("");
 
+  // const getCommentOwner = async () => {
+
+  // }
+
   const deleteComment = async (e) => {
     console.log("delete clicked");
-    // const commentId = { id };
     console.log(commentId);
     try {
       const deletedComment = await axios.delete(

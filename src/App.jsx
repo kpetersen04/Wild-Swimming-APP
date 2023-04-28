@@ -7,6 +7,7 @@ import About from "../pages/About";
 import SignIn from "../pages/SignIn";
 import Register from "../pages/Register";
 import SingleSwimSite from "../pages/SingleSwimSite";
+import MyAccount from "../pages/MyAccount";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/swim-sites/:id" element={<SingleSwimSite />} />
+        <Route path="/my-account/:id" element={<MyAccount />} />
       </Routes>
     </div>
   );

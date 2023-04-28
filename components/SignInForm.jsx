@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { DEV_API_URL } from "../consts";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 const SignInForm = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,6 +21,13 @@ const SignInForm = () => {
     setSignInForm({ ...signInForm, [e.target.name]: e.target.value });
   };
 
+  const decodeToken = () => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+    const userId = decodedToken.sub;
+    localStorage.setItem("userId", userId);
+  };
+
   const SignIn = async (e) => {
     e.preventDefault();
     try {
@@ -29,6 +37,7 @@ const SignInForm = () => {
       );
       localStorage.setItem("token", data.token);
       setIsLoggedIn(true);
+      decodeToken();
       navigate("/");
     } catch (err) {
       setShowError(true);

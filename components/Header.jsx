@@ -11,6 +11,7 @@ const Header = () => {
   const [regionsData, setRegionsData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
+  const id = localStorage.getItem("userId");
 
   const fetchData = async () => {
     try {
@@ -69,9 +70,14 @@ const Header = () => {
           </Nav>
           <Nav>
             {isLoggedIn ? (
-              <Nav.Link as={Link} to={"/"} onClick={signOut}>
-                Sign Out
-              </Nav.Link>
+              <>
+                <Nav.Link as={Link} to={`/my-account/${id}`}>
+                  My Account
+                </Nav.Link>
+                <Nav.Link as={Link} to={"/"} onClick={signOut}>
+                  Sign Out
+                </Nav.Link>
+              </>
             ) : (
               <>
                 <Nav.Link as={Link} to={"/sign-in"}>
