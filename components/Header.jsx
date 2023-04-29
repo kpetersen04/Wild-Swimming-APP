@@ -12,7 +12,6 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
   const id = localStorage.getItem("userId");
-  // const [showDeleteButton, setShowDeleteButton] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -32,10 +31,6 @@ const Header = () => {
   }, [location]);
   console.log(isLoggedIn);
 
-  const onClick = () => {
-    fetchData();
-  };
-
   const signOut = (e) => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
@@ -53,17 +48,12 @@ const Header = () => {
             <Nav.Link as={Link} to={"/about"}>
               About
             </Nav.Link>
-            <NavDropdown
-              title="Browse by Region"
-              id="basic-nav-dropdown"
-              onClick={onClick}
-            >
+            <NavDropdown title="Browse by Region" id="basic-nav-dropdown">
               {regionsData.map((region, idx) => (
                 <NavDropdown.Item
-                  as={Link}
-                  to={`/sites-by-region/${region.id}`}
+                  id={region.id}
+                  href={`/sites-by-region/${region.id}`}
                   key={idx}
-                  // onClick={onClick}
                 >
                   {region.region_name}
                 </NavDropdown.Item>
@@ -80,7 +70,12 @@ const Header = () => {
                       <NavDropdown.Item as={Link} to={`/my-account/${id}`}>
                         My Prolife
                       </NavDropdown.Item>
-                      <NavDropdown.Item>Change My Details</NavDropdown.Item>
+                      <NavDropdown.Item
+                        as={Link}
+                        to={"/my-account/:id/account-details"}
+                      >
+                        Change My Details
+                      </NavDropdown.Item>
                       <NavDropdown.Item>Update My Password</NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item as={Link} to={"/"} onClick={signOut}>
