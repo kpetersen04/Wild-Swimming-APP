@@ -70,14 +70,6 @@ const Header = () => {
                       <NavDropdown.Item as={Link} to={`/my-account/${id}`}>
                         My Prolife
                       </NavDropdown.Item>
-                      <NavDropdown.Item
-                        as={Link}
-                        to={"/my-account/:id/account-details"}
-                      >
-                        Change My Details
-                      </NavDropdown.Item>
-                      <NavDropdown.Item>Update My Password</NavDropdown.Item>
-                      <NavDropdown.Divider />
                       <NavDropdown.Item as={Link} to={"/"} onClick={signOut}>
                         Sign Out
                       </NavDropdown.Item>

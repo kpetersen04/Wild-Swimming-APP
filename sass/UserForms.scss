@@ -1,0 +1,38 @@
+.form_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.user_forms {
+  background-color: white;
+  min-height: 320px;
+  max-height: 400px;
+  width: 450px;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.user_forms_header {
+  text-align: center;
+}
+
+.signIn_button {
+  margin-top: 30px;
+}
+
+.register_page {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.register_form_container {
+  margin-left: 10%;
+  margin-top: 2%;
+}
+.register_form {
+  min-height: 775px;
+}

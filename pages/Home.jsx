@@ -26,12 +26,12 @@ const Home = () => {
   return (
     <div>
       <h1>This is the home page.</h1>
-      <Carousel style={{ width: "650px" }}>
+      <Carousel style={{ width: "75%" }}>
         {allSwimSites.map((site) => (
           <Carousel.Item key={site.id}>
             <img
               className="d-block w-100"
-              height="300px"
+              height="400px"
               src={site.image}
               alt="First slide"
             />

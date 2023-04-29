@@ -28,6 +28,7 @@ const SignInForm = () => {
     localStorage.setItem("userId", userId);
   };
 
+  // ADD IN A NETWORK ERROR, FOR EXAMPLE IF THE BACKEND ISN'T CONNECTED
   const SignIn = async (e) => {
     e.preventDefault();
     try {
@@ -48,7 +49,8 @@ const SignInForm = () => {
   };
 
   return (
-    <Form onSubmit={SignIn}>
+    <Form onSubmit={SignIn} className="singIn_form user_forms">
+      <h4 className="user_forms_header">Sign In</h4>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
@@ -57,9 +59,6 @@ const SignInForm = () => {
           onChange={onChange}
           name="email"
         />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
@@ -71,7 +70,7 @@ const SignInForm = () => {
         />
       </Form.Group>
       {showError && <p>{error}</p>}
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" className="signIn_button">
         Sign In
       </Button>
     </Form>

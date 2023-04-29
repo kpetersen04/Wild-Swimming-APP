@@ -1,10 +1,11 @@
 import { Component } from "react";
 import SignInForm from "../components/SignInForm";
+import ClearWater from "../assests/ClearWater.jpg";
 
 const SignIn = () => {
   return (
-    <div>
-      <h1>This is the sign in page.</h1>
+    <div className="form_page">
+      <img className="clearWater_image" src={ClearWater}></img>
       <SignInForm />
     </div>
   );

@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { DEV_API_URL } from "../consts";
 import { useNavigate } from "react-router-dom";
+import Waterfall from "../assests/Waterfall.jpg";
 
 const Register = () => {
   const [registerFormData, setRegisterFormData] = useState({
@@ -46,10 +47,12 @@ const Register = () => {
     }
   };
   return (
-    <div>
-      <h1>This is the register page.</h1>
+    <div className=" register_page">
       {/* {showError && <h3>{error}</h3>} */}
-      <RegisterForm onSubmit={onSubmit} onChange={onChange} />
+      <img className="waterfall_image" src={Waterfall}></img>
+      <div className="register_form_container">
+        <RegisterForm onSubmit={onSubmit} onChange={onChange} />
+      </div>
     </div>
   );
 };
