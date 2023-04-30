@@ -1,0 +1,13 @@
+.loading_container {
+  text-align: center;
+  margin-top: 5rem;
+
+  ._spinner {
+    width: 90px;
+    height: 90px;
+  }
+
+  ._text {
+    font-size: 20px;
+  }
+}

@@ -76,10 +76,10 @@ const RegisterForm = ({ onChange, onSubmit }) => {
           onChange={onChange}
         />
       </Form.Group>
-      {/* <Form.Group controlId="formFile" className="mb-3">
+      <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Profile Picture</Form.Label>
         <Form.Control type="file" name="profile_photo" onChange={onChange} />
-      </Form.Group> */}
+      </Form.Group>
       <Button variant="primary" type="submit">
         Submit
       </Button>

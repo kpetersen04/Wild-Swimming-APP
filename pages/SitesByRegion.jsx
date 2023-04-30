@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { DEV_API_URL } from "../consts";
-// import SwimSiteCard from "../components/SwimSiteCard";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import SwimSiteCard from "../components/SwimSiteCard";
+import LoadingVisual from "../components/LoadingVisual";
 
 const SitesByRegion = () => {
   const { id } = useParams();
@@ -33,7 +31,7 @@ const SitesByRegion = () => {
     <div>
       <h1>This is the region:</h1>
       {isLoading ? (
-        <p>Loading..</p>
+        <LoadingVisual />
       ) : (
         <ul className="card-container">
           {swimSites.map(

@@ -25,9 +25,7 @@ const CommentCard = ({
     site: "",
     created_by: "",
   });
-  // console.log(`userId: ${userId}`);
-  // console.log(token);
-  // console.log(`SwimSite: ${swimSiteId}`);
+
   const submitUpdatedComment = async (e) => {
     e.preventDefault();
     try {

@@ -1,7 +1,6 @@
 const About = () => {
   return (
     <>
-      <h1>This is the About page.</h1>
       <h3>What is Wild Swimming</h3>
       <p>
         Wild swimming is simply swimming – or just taking a dip – in any of
