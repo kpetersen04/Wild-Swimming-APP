@@ -11,9 +11,7 @@ const SingleSwimSite = () => {
   const { id } = useParams();
   const [swimSite, setSwimSite] = useState([]);
   const [comments, setComments] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isAddCommentClicked, setIsAddCommentClicked] = useState(false);
-  // const [showDeleteButton, setShowDeleteButton] = useState(false);
   const commentData = {
     text: "",
     site: "",
@@ -30,9 +28,6 @@ const SingleSwimSite = () => {
       console.log(data);
       setSwimSite(data);
       setComments(data.comments);
-      setIsLoggedIn(token);
-
-      // setShowDeleteButton(isCommentOwner);
     } catch (err) {
       console.log(err);
     }
@@ -95,11 +90,9 @@ const SingleSwimSite = () => {
       <h1>{swimSite.name}</h1>
       <DetailedSwimSiteCard swimSite={swimSite} />
       <h3>Comments</h3>
-      {isLoggedIn && (
-        <Button variant="link" size="sm" onClick={accessComment}>
-          Add a comment
-        </Button>
-      )}
+      <Button variant="link" size="sm" onClick={accessComment}>
+        Add a comment
+      </Button>
       <div className="comments-container">
         {isAddCommentClicked && (
           <ul>
@@ -120,8 +113,6 @@ const SingleSwimSite = () => {
         <ul>
           {comments.map(({ id, text, created_at, created_by }) => {
             const { first_name, last_name } = created_by;
-            console.log(created_by.id);
-            console.log(userId);
             return (
               <li key={id}>
                 <CommentCard
@@ -132,6 +123,7 @@ const SingleSwimSite = () => {
                   commentPosted={created_at}
                   token={token}
                   isCommentOwner={created_by.id === userId}
+                  swimSiteId={swimSite.id}
                 />
               </li>
             );

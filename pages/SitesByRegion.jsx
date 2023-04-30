@@ -17,9 +17,7 @@ const SitesByRegion = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${DEV_API_URL}/regions/${id}`);
-        console.log(data);
         const region = data.region_name;
-        console.log(region);
         const swimSites = data.swim_sites;
         console.log(swimSites);
         setSwimSites(swimSites);
