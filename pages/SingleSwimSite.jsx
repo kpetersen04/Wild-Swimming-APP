@@ -6,21 +6,23 @@ import { useParams } from "react-router-dom";
 import DetailedSwimSiteCard from "../components/DetailedSwimSiteCard";
 import CommentCard from "../components/CommentCard";
 import jwtDecode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const SingleSwimSite = () => {
   const { id } = useParams();
   const [swimSite, setSwimSite] = useState([]);
   const [comments, setComments] = useState([]);
-  const [isAddCommentClicked, setIsAddCommentClicked] = useState(false);
+  const [canAccessComment, setCanAccessComment] = useState(false);
   const commentData = {
     text: "",
     site: "",
     createdBy: "",
   };
   const [commentToAdd, setCommentToAdd] = useState(commentData);
-  // const [showDeleteButton, setShowDeleteButton] = useState(false);
+  const [isloggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
   const token = localStorage.getItem("token");
   const userId = parseInt(localStorage.getItem("userId"));
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
@@ -41,7 +43,11 @@ const SingleSwimSite = () => {
 
   const accessComment = (e) => {
     console.log("Add Comment button clicked.");
-    setIsAddCommentClicked(true);
+    if (isloggedIn) {
+      setCanAccessComment(true);
+    } else {
+      navigate("/sign-in");
+    }
   };
 
   const onChange = (e) => {
@@ -76,7 +82,7 @@ const SingleSwimSite = () => {
 
       if (newComment) {
         console.log("There is a new comment.");
-        setIsAddCommentClicked(false);
+        setCanAccessComment(false);
         // Is there a better way to do this?
         window.location.reload();
       }
@@ -94,7 +100,7 @@ const SingleSwimSite = () => {
         Add a comment
       </Button>
       <div className="comments-container">
-        {isAddCommentClicked && (
+        {canAccessComment && (
           <ul>
             <li>
               <Form onSubmit={addComment}>
