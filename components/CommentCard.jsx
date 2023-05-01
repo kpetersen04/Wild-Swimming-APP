@@ -66,69 +66,59 @@ const CommentCard = ({
     } catch (err) {
       const { detail } = err.response.data;
       console.log(detail);
-
-      setShowError(true);
-      setError(
-        "This is not your comment. Users can only delete their own comments."
-      );
     }
   };
 
   return (
-    <div>
-      <Card>
-        <Card.Body>
-          {showError && (
-            <div>
-              <p>{error}</p>{" "}
-              <Button
-                variant="outline-secondary"
-                onClick={() => setShowError(false)}
-              >
-                x
-              </Button>
-            </div>
-          )}
+    <Card className="comment-card-container">
+      <Card.Body>
+        <div className="comment-title">
           <Card.Title>
-            {firstName} {lastName} says:{" "}
-          </Card.Title>{" "}
+            {firstName} {lastName} says:
+          </Card.Title>
           {showButtons && (
-            <Button variant="outline-danger" onClick={deleteComment}>
+            <Button
+              variant="outline-secondary"
+              className="_delete-button"
+              onClick={deleteComment}
+            >
               x
             </Button>
           )}
-          {isEditing ? (
-            <Form onSubmit={submitUpdatedComment}>
-              <Form.Control
-                type="text"
-                value={updatedComment.text}
-                name="text"
-                onChange={(e) =>
-                  setUpdatedComment({
-                    ...updatedComment,
-                    text: e.target.value,
-                  })
-                }
-              />
-            </Form>
-          ) : (
-            <Card.Text>
-              {text}
-              {showButtons && (
-                <Button
-                  variant="link"
-                  size="sm"
-                  onClick={(e) => setIsEditing(true)}
-                >
-                  edit my comment
-                </Button>
-              )}
-            </Card.Text>
+        </div>
+        {isEditing ? (
+          <Form onSubmit={submitUpdatedComment}>
+            <Form.Control
+              className="comment-text-field"
+              type="text"
+              value={updatedComment.text}
+              name="text"
+              onChange={(e) =>
+                setUpdatedComment({
+                  ...updatedComment,
+                  text: e.target.value,
+                })
+              }
+            />
+          </Form>
+        ) : (
+          <Card.Text>{text}</Card.Text>
+        )}
+        <Card.Text className="date-stamp-text">
+          Posted on {commentPosted}.{" "}
+          {showButtons && (
+            <Button
+              className="edit-comment-button"
+              variant="link"
+              size="sm"
+              onClick={(e) => setIsEditing(true)}
+            >
+              Edit my comment
+            </Button>
           )}
-          <Card.Text>{commentPosted}</Card.Text>
-        </Card.Body>
-      </Card>
-    </div>
+        </Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
 

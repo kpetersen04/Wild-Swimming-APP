@@ -1,0 +1,76 @@
+// SingleSwimSite Page Content
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-container {
+  text-align: center;
+  width: 40%;
+  margin: auto;
+  color: rgb(225, 69, 69);
+}
+
+._error-delete-button {
+  font-size: small;
+  padding: 0.3rem;
+  padding-bottom: 0;
+  padding-top: 0;
+  margin-bottom: 18px;
+  color: rgb(225, 69, 69);
+  border: 1px solid rgb(225, 69, 69);
+}
+
+.text-body {
+  width: 70%;
+}
+
+// Comment Section
+.comments-section {
+  width: 70%;
+  margin: 0 auto;
+
+  .comments-header {
+    margin-top: 2rem;
+    // margin-bottom: 0;
+  }
+
+  & ul {
+    list-style: none;
+    padding: 0;
+  }
+}
+
+// Comment Card
+.comment-card-container {
+  margin-bottom: 0.5rem;
+}
+.comment-title {
+  display: flex;
+  justify-content: space-between;
+
+  ._delete-button {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.15rem;
+    padding-bottom: 0.35rem;
+    text-align: center;
+  }
+}
+
+.comment-text-field {
+  margin: 5px 0;
+}
+
+.edit-comment-button {
+  font-style: italic;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.date-stamp-text {
+  font-size: 12px;
+  color: grey;
+  font-style: italic;
+}

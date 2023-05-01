@@ -23,6 +23,32 @@ const SwimSiteCard = ({
   const userId = localStorage.getItem("userId");
 
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+
+  const deleteFromFavorites = async (e) => {
+    try {
+      const deletedFavorite = await axios.delete(
+        `${DEV_API_URL}/favorites/${favoriteId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (deletedFavorite) {
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const clearErrors = (e) => {
+    setShowError(false);
+    setError("");
+  };
 
   return (
     <div>

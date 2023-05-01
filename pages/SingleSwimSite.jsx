@@ -31,19 +31,18 @@ const SingleSwimSite = () => {
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      const { data } = await axios.get(`${DEV_API_URL}/swim-sites/${id}/`);
-      setSwimSite(data);
-      setSwimSiteId(data.id);
-      setComments(data.comments);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DEV_API_URL}/swim-sites/${id}/`);
+        setSwimSite(data);
+        setSwimSiteId(data.id);
+        setComments(data.comments);
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     fetchData();
   }, []);
 
@@ -142,13 +141,13 @@ const SingleSwimSite = () => {
   };
 
   return (
-    <div>
+    <div className="single-swim-site-page">
       {isLoading ? (
         <LoadingVisual />
       ) : (
         <div>
-          <h1>{swimSite.name}</h1>
-          <div>
+          <div className="header-container">
+            <h1>{swimSite.name}</h1>
             <Heart
               isClick={isClick}
               onClick={() => {
@@ -158,22 +157,27 @@ const SingleSwimSite = () => {
             />
           </div>
           {showError && (
-            <Card.Text>
+            <Card.Text className="error-container">
               {error}
-              <Button variant="outline-danger" onClick={clearErrors}>
+              <Button
+                className="_error-delete-button"
+                variant="outline-secondary"
+                onClick={clearErrors}
+              >
                 x
               </Button>
             </Card.Text>
           )}
+
           <DetailedSwimSiteCard swimSite={swimSite} />
-          <h3>Comments</h3>
-          <Button variant="link" size="sm" onClick={accessComment}>
-            Add a comment
-          </Button>
-          <div className="comments-container">
+          <div className="comments-section">
+            <h3 className="comments-header">Comments</h3>
+            <Button variant="link" size="sm" onClick={accessComment}>
+              Add a comment
+            </Button>
             {canAccessComment && (
-              <ul>
-                <li>
+              <ul className="add-comment">
+                <li className="add-comment">
                   <Form onSubmit={addComment}>
                     <Form.Group className="mb-3" controlId="commentText">
                       <Form.Control
@@ -187,25 +191,32 @@ const SingleSwimSite = () => {
                 </li>
               </ul>
             )}
-            <ul>
-              {comments.map(({ id, text, created_at, created_by }) => {
-                const { first_name, last_name } = created_by;
-                return (
-                  <li key={id}>
-                    <CommentCard
-                      commentId={id}
-                      text={text}
-                      firstName={first_name}
-                      lastName={last_name}
-                      commentPosted={created_at}
-                      token={token}
-                      isCommentOwner={created_by.id === userId}
-                      swimSiteId={swimSite.id}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
+            <div className="_all-comments-container">
+              <ul>
+                {comments.map(({ id, text, created_at, created_by }) => {
+                  const { first_name, last_name } = created_by;
+                  const dateObject = new Date(created_at);
+                  const createdAtLongFormat = dateObject.toLocaleDateString(
+                    "en-UK",
+                    { month: "long", day: "numeric", year: "numeric" }
+                  );
+                  return (
+                    <li key={id}>
+                      <CommentCard
+                        commentId={id}
+                        text={text}
+                        firstName={first_name}
+                        lastName={last_name}
+                        commentPosted={createdAtLongFormat}
+                        token={token}
+                        isCommentOwner={created_by.id === userId}
+                        swimSiteId={swimSite.id}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
       )}
