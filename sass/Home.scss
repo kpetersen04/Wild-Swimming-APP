@@ -1,0 +1,35 @@
+.homepage-container {
+  background-image: url("../assets/RedSwimming.jpg");
+  height: 93.85vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(195, 190, 190);
+
+  ._text-body {
+    border: 2px solid rgb(195, 190, 190);
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: 800;
+    font-size: 20px;
+    position: relative;
+    top: 15%;
+    left: 7%;
+    width: 23%;
+    color: rgb(195, 190, 190);
+  }
+
+  //   ._text {
+  //   }
+
+  ._carousel-container {
+    width: 35%;
+    height: 100px;
+    position: relative;
+    top: 60%;
+    left: 33%;
+    // background-color: rgb(195, 190, 190);
+    padding: 10px;
+    border-radius: 10px;
+    color: rgb(195, 190, 190);
+  }
+}

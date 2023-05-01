@@ -1,47 +1,29 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { DEV_API_URL } from "../consts";
-import Carousel from "react-bootstrap/Carousel";
-// import SwimSiteCarousel from "../components/Carousel";
+// import HomePageImage from "../assests/HomePageImage.jpg";
+import { Carousel } from "react-bootstrap";
 // import SwimSiteCard from "../components/SwimSiteCard";
+import { Card } from "react-bootstrap";
 
 const Home = () => {
-  const [regions, setRegion] = useState([]);
-  const [allSwimSites, setAllSwimSites] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const dbresponse = await axios.get(`${DEV_API_URL}/regions/`);
-        const { data } = await axios.get(`${DEV_API_URL}/swim-sites/`);
-        const allSwimSites = data;
-        setAllSwimSites(allSwimSites);
-        console.log(data);
-      } catch (err) {
-        return err;
-      }
-    };
-    fetchData();
-  }, []);
-
   return (
-    <div>
-      <h1>This is the home page.</h1>
-      <Carousel style={{ width: "75%" }}>
-        {allSwimSites.map((site) => (
-          <Carousel.Item key={site.id}>
-            <img
-              className="d-block w-100"
-              height="400px"
-              src={site.image}
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3>{site.name}</h3>
-              <p>{site.location}</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+    <div className="homepage-container">
+      {/* <img className="_image" src={HomePageImage} /> */}
+      <div className="_text-body">
+        <p className="_text">
+          Welcome to our Wild Swimming Community! We bring all the best wild
+          swimming spots in the United Kingdom together in one place.
+        </p>
+        <p className="_text">
+          Create an account to keep track of your favorite spots or feel free to
+          just have a look around.
+        </p>
+        <p>
+          If you find somewhere you love or you have some insight on a specific
+          site, make sure to leave a comment, so the community can all benefit!
+        </p>
+      </div>
     </div>
   );
 };

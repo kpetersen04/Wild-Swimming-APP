@@ -1,9 +1,24 @@
-.form_page {
+.form-page {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  height: 93.9vh;
+}
+.form-page {
+  overflow: hidden;
+}
+
+.sign-in {
+  background-image: url("../assets/ClearWater.jpg");
+  background-size: cover;
+}
+
+.register-page {
+  background-image: url("../assets/Waterfall.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: left;
 }
 
 .user_forms {
@@ -23,16 +38,15 @@
   margin-top: 30px;
 }
 
-.register_page {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-}
-
 .register_form_container {
   margin-left: 10%;
-  margin-top: 2%;
+  margin-top: 0.5%;
+
+  .form-label {
+    margin-bottom: 0;
+  }
 }
-.register_form {
-  min-height: 850px;
+.register-form {
+  min-height: 800px;
+  background-color: white;
 }

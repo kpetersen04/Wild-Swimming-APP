@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 
 const RegisterForm = ({ onChange, onSubmit }) => {
   return (
-    <Form onSubmit={onSubmit} className="user_forms register_form">
+    <Form onSubmit={onSubmit} className="user_forms register-form">
       <h4 className="user_forms_header">Register a New Account</h4>
       <Form.Group className="mb-3" controlId="1">
         <Form.Label>Username</Form.Label>
