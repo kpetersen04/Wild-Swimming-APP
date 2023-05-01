@@ -15,9 +15,9 @@ const SitesByRegion = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${DEV_API_URL}/regions/${id}`);
-        const region = data.region_name;
+        console.log(data);
+        setRegion(data.region_name);
         const swimSites = data.swim_sites;
-        console.log(swimSites);
         setSwimSites(swimSites);
         setIsLoading(false);
       } catch (err) {
@@ -29,7 +29,7 @@ const SitesByRegion = () => {
 
   return (
     <div>
-      <h1>This is the region:</h1>
+      <h1>{region}</h1>
       {isLoading ? (
         <LoadingVisual />
       ) : (

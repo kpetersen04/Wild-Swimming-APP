@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { DEV_API_URL } from "../consts";
 import { useState } from "react";
 import axios from "axios";
-import Heart from "react-animated-heart";
+import { useNavigate } from "react-router-dom";
 
 const SwimSiteCard = ({
   description,
@@ -19,46 +19,10 @@ const SwimSiteCard = ({
   favoriteId,
 }) => {
   const token = localStorage.getItem("token");
+
   const userId = localStorage.getItem("userId");
-  const [isClick, setClick] = useState(false);
 
-  const addToFavorites = async (e) => {
-    try {
-      const response = await axios.post(
-        `${DEV_API_URL}/favorites/`,
-        {
-          site: swimSitesId,
-          created_by: userId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const deleteFromFavorites = async (e) => {
-    try {
-      const deletedFavorite = await axios.delete(
-        `${DEV_API_URL}/favorites/${favoriteId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (deletedFavorite) {
-        window.location.reload();
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -87,16 +51,7 @@ const SwimSiteCard = ({
         <Card style={{ width: "20rem" }}>
           <Card.Img variant="top" src={image} />
           <Card.Body>
-            <Card.Title>
-              {name}{" "}
-              <Heart
-                isClick={isClick}
-                onClick={() => {
-                  setClick(!isClick);
-                  addToFavorites();
-                }}
-              />
-            </Card.Title>
+            <Card.Title>{name} </Card.Title>
 
             <Card.Text>{location}</Card.Text>
             <Button
