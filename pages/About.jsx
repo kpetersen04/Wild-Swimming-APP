@@ -5,19 +5,26 @@ import { DEV_API_URL } from "../consts";
 import Swimmer from "../assets/HomePageImage.jpg";
 import ManJumping from "../assets/ManJumping.jpg";
 import { Link } from "react-router-dom";
+import LoadingVisual from "../components/LoadingVisual";
 
 const About = () => {
   const [regions, setRegion] = useState([]);
   const [allSwimSites, setAllSwimSites] = useState([]);
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const dbresponse = await axios.get(`${DEV_API_URL}/regions/`);
         const { data } = await axios.get(`${DEV_API_URL}/swim-sites/`);
+
         const allSwimSites = data;
         setAllSwimSites(allSwimSites);
         console.log(data);
       } catch (err) {
+        setShowError(true);
+        setError("Network Error, please try again later.");
         return err;
       }
     };
@@ -118,26 +125,32 @@ const About = () => {
           United Kingdom. Here are a few of the fabulous sites are members have
           found.
         </p>
-        <Carousel style={{ width: "100%" }}>
-          {allSwimSites.map((site) => (
-            <Carousel.Item
-              as={Link}
-              to={`/swim-sites/${site.id}`}
-              key={site.id}
-            >
-              <img
-                className="d-block w-100"
-                height="400px"
-                src={site.image}
-                alt="First slide"
-              />
-              <Carousel.Caption>
-                <h3>{site.name}</h3>
-                <p>{site.location}</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          ))}
-        </Carousel>
+        {showError ? (
+          <>
+            <LoadingVisual />
+          </>
+        ) : (
+          <Carousel style={{ width: "100%" }}>
+            {allSwimSites.map((site) => (
+              <Carousel.Item
+                as={Link}
+                to={`/swim-sites/${site.id}`}
+                key={site.id}
+              >
+                <img
+                  className="d-block w-100"
+                  height="400px"
+                  src={site.image}
+                  alt="First slide"
+                />
+                <Carousel.Caption>
+                  <h3>{site.name}</h3>
+                  <p>{site.location}</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        )}
       </body>
     </div>
   );

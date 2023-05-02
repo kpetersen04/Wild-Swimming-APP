@@ -53,18 +53,21 @@ const SwimSiteCard = ({
   return (
     <div>
       {isAccountCard ? (
-        <Card style={{ width: "20rem" }}>
-          <Card.Body>
+        <Card className="account-card-container">
+          <Card.Body className="_tile-container">
             <Card.Title>{name}</Card.Title>
-            <Button variant="outline-danger" onClick={deleteFromFavorites}>
+            <Button
+              variant="outline-secondary"
+              className="_delete-button"
+              onClick={deleteFromFavorites}
+            >
               x
             </Button>
           </Card.Body>
-          <Card.Img variant="top" src={image} />
+          <Card.Img className="_image" variant="top" src={image} />
           <Card.Body>
-            <Card.Title>{name}</Card.Title>
-            <Card.Text>{location}</Card.Text>
             <Button
+              className="account-card-button"
               variant="primary"
               as={Link}
               to={`/swim-sites/${swimSitesId}/`}

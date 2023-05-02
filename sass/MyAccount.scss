@@ -1,0 +1,25 @@
+.account-card-container {
+  padding: 1rem;
+  width: 20rem;
+  ._tile-container {
+    display: flex;
+    justify-content: space-between;
+
+    ._delete-button {
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+      padding-top: 0.15rem;
+      padding-bottom: 0.35rem;
+      text-align: center;
+    }
+  }
+
+  ._image {
+    border-radius: 5px;
+  }
+}
+
+.account-card-button {
+  display: flex;
+  justify-content: center;
+}

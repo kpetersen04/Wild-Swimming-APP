@@ -3,6 +3,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ._heart {
+    font-size: 45px;
+    cursor: pointer;
+  }
+
+  ._current-favorite {
+    color: red;
+  }
+
+  ._not-favorited {
+    color: grey;
+  }
 }
 
 .error-container {

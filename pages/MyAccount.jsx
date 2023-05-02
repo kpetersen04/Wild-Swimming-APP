@@ -7,15 +7,19 @@ import SwimSiteCard from "../components/SwimSiteCard";
 const MyAccount = () => {
   const { id } = useParams();
   const [favorites, setFavorites] = useState([]);
+  const [userName, setUserName] = useState("");
+  const [user, setUser] = useState({});
   console.log(id);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${DEV_API_URL}/auth/user/${id}`);
-        console.log(data.favorites);
+        console.log(data);
+        setUser(data);
         const favorites = data.favorites;
-        console.log(favorites);
         setFavorites(favorites);
+        setUserName(`${data.first_name} ${data.last_name}`);
+        console.log(data.profile_photo);
       } catch (err) {
         console.log(err);
       }
@@ -25,22 +29,28 @@ const MyAccount = () => {
 
   return (
     <div>
-      <p>You've made it to your My Acount page.</p>
-      {favorites.map(({ site, id }) => {
-        return (
-          <li key={id}>
-            <SwimSiteCard
-              name={site.name}
-              location={site.location}
-              image={site.image}
-              swimSitesId={site.id}
-              isAccountCard={true}
-              favoriteId={id}
-            />
-            ;
-          </li>
-        );
-      })}
+      <h1>{userName}</h1>
+
+      <p>{user.bio}</p>
+      <img src="{user.profile_photo}" />
+      <p>PROFILE PICTURE GOES HERE?</p>
+      <h2>My Favorites</h2>
+      <ul className="card-container">
+        {favorites.map(({ site, id }) => {
+          return (
+            <li key={id}>
+              <SwimSiteCard
+                name={site.name}
+                location={site.location}
+                image={site.image}
+                swimSitesId={site.id}
+                isAccountCard={true}
+                favoriteId={id}
+              />
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

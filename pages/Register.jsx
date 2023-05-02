@@ -13,6 +13,7 @@ const Register = () => {
     password_confirmation: "",
     first_name: "",
     last_name: "",
+    profile_photo: null,
   });
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState("");
@@ -24,6 +25,10 @@ const Register = () => {
     setRegisterFormData({
       ...registerFormData,
       [e.target.name]: e.target.value,
+      profile_photo:
+        e.target.name === "profile_photo"
+          ? e.target.files[0]
+          : registerFormData.profile_photo,
     });
   };
 
@@ -34,7 +39,12 @@ const Register = () => {
     try {
       const response = await axios.post(
         `${DEV_API_URL}/auth/register/`,
-        registerFormData
+        registerFormData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       console.log(response);
       if (response) {

@@ -27,9 +27,28 @@ const SingleSwimSite = () => {
   const token = localStorage.getItem("token");
   const userId = parseInt(localStorage.getItem("userId"));
   const navigate = useNavigate();
-  const [isClick, setClick] = useState(false);
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
+  const [userFavorites, setUserFavorites] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [favoriteId, setFavoriteId] = useState("");
+
+  const checkForFavorite = async ({ swimSiteId }) => {
+    console.log(swimSiteId);
+    const user = await axios.get(`${DEV_API_URL}/auth/user/${userId}`);
+    const userFavorites = user.data.favorites;
+    const foundFavorite = userFavorites.filter(
+      (fav) => fav.site.id === swimSiteId
+    );
+
+    if (foundFavorite.length === 0) {
+      setIsFavorite(false);
+    } else {
+      const favoriteId = foundFavorite[0].id;
+      setFavoriteId(foundFavorite[0].id);
+      setIsFavorite(foundFavorite.length === 1);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +58,10 @@ const SingleSwimSite = () => {
         setSwimSiteId(data.id);
         setComments(data.comments);
         setIsLoading(false);
+        if (isLoggedIn) {
+          console.log(data.id);
+          checkForFavorite({ swimSiteId: data.id });
+        }
       } catch (err) {
         console.log(err);
       }
@@ -61,14 +84,14 @@ const SingleSwimSite = () => {
             },
           }
         );
+        setIsFavorite(true);
+        window.location.reload();
       } else {
         navigate(`/sign-in`);
       }
     } catch (err) {
-      console.log(err);
       setClick(false);
       setShowError(true);
-      console.log(err.response.data.detail);
       setError(err.response.data.detail);
     }
   };
@@ -148,13 +171,18 @@ const SingleSwimSite = () => {
         <div>
           <div className="header-container">
             <h1>{swimSite.name}</h1>
-            <Heart
-              isClick={isClick}
-              onClick={() => {
-                setClick(!isClick);
-                addToFavorites();
-              }}
-            />
+            {isFavorite ? (
+              <span
+                className=" _heart _current-favorite"
+                onClick={deleteFromFavorites}
+              >
+                &#9825;
+              </span>
+            ) : (
+              <span className=" _heart _not-favorited" onClick={addToFavorites}>
+                &#9825;
+              </span>
+            )}
           </div>
           {showError && (
             <Card.Text className="error-container">

@@ -1,6 +1,6 @@
 .homepage-container {
   background-image: url("../assets/RedSwimming.jpg");
-  height: 93.85vh;
+  height: calc(100vh - 56px);
   background-size: cover;
   background-repeat: no-repeat;
   background-color: rgb(195, 190, 190);
@@ -14,7 +14,7 @@
     position: relative;
     top: 15%;
     left: 7%;
-    width: 23%;
+    width: 30%;
     color: rgb(195, 190, 190);
   }
 
