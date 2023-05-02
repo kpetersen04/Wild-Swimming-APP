@@ -8,7 +8,6 @@ import CommentCard from "../components/CommentCard";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import LoadingVisual from "../components/LoadingVisual";
-import Heart from "react-animated-heart";
 
 const SingleSwimSite = () => {
   const { id } = useParams();

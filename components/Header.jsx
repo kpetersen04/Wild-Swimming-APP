@@ -17,7 +17,6 @@ const Header = () => {
     try {
       const dbresponse = await axios.get(`${DEV_API_URL}/regions/`);
       const regionsInfo = dbresponse.data;
-      console.log(dbresponse.data);
       setRegionsData(regionsInfo);
     } catch (err) {
       return err;
@@ -27,9 +26,7 @@ const Header = () => {
   useEffect(() => {
     fetchData();
     setIsLoggedIn(localStorage.getItem("token") ? true : false);
-    console.log("location updated");
   }, [location]);
-  console.log(isLoggedIn);
 
   const signOut = (e) => {
     localStorage.removeItem("token");

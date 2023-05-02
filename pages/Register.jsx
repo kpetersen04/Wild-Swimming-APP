@@ -13,22 +13,41 @@ const Register = () => {
     password_confirmation: "",
     first_name: "",
     last_name: "",
-    profile_photo: null,
+    profile_photo: "",
   });
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const [imageURL, setImageURL] = useState("");
+  const myWidget = cloudinary.createUploadWidget(
+    {
+      cloudName: "de7f0or8o",
+      uploadPreset: "ws_profile_photos",
+    },
+    (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log("Done, here is the image info: ", result.info);
+        const { url } = result.info;
+        setImageURL(url);
+        console.log(url);
+        setRegisterFormData({
+          ...registerFormData,
+          profile_photo: url,
+        });
+      }
+    }
+  );
+
+  const uploadPhoto = (e) => {
+    myWidget.open();
+  };
 
   const onChange = (e) => {
     console.log(e.target.value);
     setRegisterFormData({
       ...registerFormData,
       [e.target.name]: e.target.value,
-      profile_photo:
-        e.target.name === "profile_photo"
-          ? e.target.files[0]
-          : registerFormData.profile_photo,
     });
   };
 
@@ -39,12 +58,7 @@ const Register = () => {
     try {
       const response = await axios.post(
         `${DEV_API_URL}/auth/register/`,
-        registerFormData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        registerFormData
       );
       console.log(response);
       if (response) {
@@ -61,7 +75,12 @@ const Register = () => {
       {/* {showError && <h3>{error}</h3>} */}
       {/* <img className="waterfall_image" src={Waterfall}></img> */}
       <div className="register_form_container">
-        <RegisterForm onSubmit={onSubmit} onChange={onChange} />
+        <RegisterForm
+          onSubmit={onSubmit}
+          onChange={onChange}
+          uploadPhoto={uploadPhoto}
+          myWidget={myWidget}
+        />
       </div>
     </div>
   );

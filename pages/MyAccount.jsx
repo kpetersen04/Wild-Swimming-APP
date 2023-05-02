@@ -30,10 +30,9 @@ const MyAccount = () => {
   return (
     <div>
       <h1>{userName}</h1>
-
-      <p>{user.bio}</p>
-      <img src="{user.profile_photo}" />
-      <p>PROFILE PICTURE GOES HERE?</p>
+      <div>
+        <p>{user.bio}</p> <img src={user.profile_photo} />
+      </div>
       <h2>My Favorites</h2>
       <ul className="card-container">
         {favorites.map(({ site, id }) => {

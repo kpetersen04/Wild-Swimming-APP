@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const RegisterForm = ({ onChange, onSubmit }) => {
+const RegisterForm = ({ onChange, onSubmit, myWidget, uploadPhoto }) => {
   return (
     <Form onSubmit={onSubmit} className="user_forms register-form">
       <h4 className="user_forms_header">Register a New Account</h4>
@@ -78,13 +78,17 @@ const RegisterForm = ({ onChange, onSubmit }) => {
       </Form.Group>
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Profile Picture</Form.Label>
-        <Form.Control
-          type="file"
-          accept="image/*"
+        <Button
+          variant="primary"
+          onClick={uploadPhoto}
           name="profile_photo"
-          onChange={onChange}
-        />
+          id="upload_widget"
+          // onChange={onChange}
+        >
+          Upload Photo
+        </Button>
       </Form.Group>
+
       <Button variant="primary" type="submit">
         Submit
       </Button>
