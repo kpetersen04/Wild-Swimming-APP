@@ -29,11 +29,12 @@ const MyAccount = () => {
 
   return (
     <div>
-      <h1>{userName}</h1>
-      <div>
-        <p>{user.bio}</p> <img src={user.profile_photo} />
+      <h1 className="standard-heading">{userName}</h1>
+      <div className="user-bio-container">
+        <p className="_bio-text">{user.bio}</p>{" "}
+        <img className="_profile-picture" src={user.profile_photo} />
       </div>
-      <h2>My Favorites</h2>
+      <h2 className="standard-heading">My Favorites</h2>
       <ul className="card-container">
         {favorites.map(({ site, id }) => {
           return (

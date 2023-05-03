@@ -14,6 +14,7 @@ const CommentCard = ({
   token,
   isCommentOwner,
   swimSiteId,
+  profilePhoto,
 }) => {
   const [showError, setShowError] = useState(false);
   const [showButtons, setShowButtons] = useState(isCommentOwner);
@@ -72,6 +73,7 @@ const CommentCard = ({
   return (
     <Card className="comment-card-container">
       <Card.Body>
+        <img src={profilePhoto} />
         <div className="comment-title">
           <Card.Title>
             {firstName} {lastName} says:

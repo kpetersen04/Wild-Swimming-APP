@@ -29,7 +29,7 @@ const SitesByRegion = () => {
 
   return (
     <div>
-      <h1>{region}</h1>
+      <h1 className="standard-heading">{region}</h1>
       {isLoading ? (
         <LoadingVisual />
       ) : (

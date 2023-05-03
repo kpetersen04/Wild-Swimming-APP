@@ -1,3 +1,31 @@
+// MyAccount styling
+.standard-heading {
+  padding: 25px;
+}
+.user-bio-container {
+  display: flex;
+  padding: 25px;
+  margin: 0 50px 25px 50px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2), 0px 0px 0px 2px #1d1d1d;
+
+  ._bio-text {
+    display: flex;
+    margin-right: 45px;
+    width: 50%;
+    text-align: justify;
+    font-size: 20px;
+  }
+
+  ._profile-picture {
+    width: 50%;
+    border: 20px solid black;
+    border-radius: 5%;
+  }
+}
+
+// SingleSwimSitCard styling
 .account-card-container {
   padding: 1rem;
   width: 20rem;

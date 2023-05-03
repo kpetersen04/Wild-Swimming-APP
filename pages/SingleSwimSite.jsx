@@ -222,6 +222,7 @@ const SingleSwimSite = () => {
               <ul>
                 {comments.map(({ id, text, created_at, created_by }) => {
                   const { first_name, last_name } = created_by;
+                  const { profile_photo } = created_by;
                   const dateObject = new Date(created_at);
                   const createdAtLongFormat = dateObject.toLocaleDateString(
                     "en-UK",
@@ -238,6 +239,7 @@ const SingleSwimSite = () => {
                         token={token}
                         isCommentOwner={created_by.id === userId}
                         swimSiteId={swimSite.id}
+                        profilePhoto={profile_photo}
                       />
                     </li>
                   );
