@@ -13,7 +13,8 @@ const Register = () => {
     password_confirmation: "",
     first_name: "",
     last_name: "",
-    profile_photo: "",
+    profile_photo:
+      "https://res.cloudinary.com/de7f0or8o/image/upload/v1683182954/rvgeonbagoc3ym6jodkt.webp",
   });
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState("");
