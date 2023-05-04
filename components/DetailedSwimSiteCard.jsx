@@ -12,8 +12,8 @@ const DetailedSwimSiteCard = ({ swimSite }) => {
           src={swimSite.image}
         />
       </Card>
-      <Card className="text-body">
-        <Card.Body>
+      <Card className="text-body ">
+        <Card.Body className="account-card-body">
           <Card.Text>{swimSite.description}</Card.Text>
           <Card.Text>
             Location: {swimSite.location}, {swimSite.postcode}

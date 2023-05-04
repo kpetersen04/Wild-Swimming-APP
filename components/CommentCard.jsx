@@ -92,7 +92,7 @@ const CommentCard = ({
           </div>
 
           {isEditing ? (
-            <Form onSubmit={submitUpdatedComment}>
+            <Form className="comment-text" onSubmit={submitUpdatedComment}>
               <Form.Control
                 className="comment-text-field"
                 type="text"
@@ -107,7 +107,7 @@ const CommentCard = ({
               />
             </Form>
           ) : (
-            <Card.Text>{text}</Card.Text>
+            <Card.Text className="comment-text">{text}</Card.Text>
           )}
           <Card.Text className="date-stamp-text">
             Posted on {commentPosted}.{" "}

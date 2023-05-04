@@ -9,6 +9,7 @@ const SitesByRegion = () => {
   const { id } = useParams();
   const [swimSites, setSwimSites] = useState();
   const [region, setRegion] = useState("");
+  const [regionDescription, setRegionDescription] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -17,6 +18,7 @@ const SitesByRegion = () => {
         const { data } = await axios.get(`${DEV_API_URL}/regions/${id}`);
         console.log(data);
         setRegion(data.region_name);
+        setRegionDescription(data.description);
         const swimSites = data.swim_sites;
         setSwimSites(swimSites);
         setIsLoading(false);
@@ -30,6 +32,7 @@ const SitesByRegion = () => {
   return (
     <div>
       <h1 className="standard-heading">{region}</h1>
+      <p className="region-description">{regionDescription}</p>
       {isLoading ? (
         <LoadingVisual />
       ) : (
