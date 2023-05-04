@@ -76,9 +76,13 @@ const RegisterForm = ({ onChange, onSubmit, myWidget, uploadPhoto }) => {
           onChange={onChange}
         />
       </Form.Group>
-      <Form.Group controlId="formFile" className="mb-3">
+      <Form.Group
+        controlId="formFile"
+        className="profile-photo-upload-container"
+      >
         <Form.Label>Profile Picture</Form.Label>
         <Button
+          className="_upload-button"
           variant="primary"
           onClick={uploadPhoto}
           name="profile_photo"

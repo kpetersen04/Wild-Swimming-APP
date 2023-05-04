@@ -73,7 +73,6 @@ const Register = () => {
   return (
     <div className=" register-page form-page">
       {/* {showError && <h3>{error}</h3>} */}
-      {/* <img className="waterfall_image" src={Waterfall}></img> */}
       <div className="register_form_container">
         <RegisterForm
           onSubmit={onSubmit}
