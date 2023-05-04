@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import axios from "axios";
 import { DEV_API_URL } from "../consts";
+import { useNavigate } from "react-router-dom";
 
 const CommentCard = ({
   text,
@@ -15,7 +16,9 @@ const CommentCard = ({
   isCommentOwner,
   swimSiteId,
   profilePhoto,
+  commentOwner,
 }) => {
+  const navigate = useNavigate();
   const [showError, setShowError] = useState(false);
   const [showButtons, setShowButtons] = useState(isCommentOwner);
   const [error, setError] = useState("");
@@ -39,7 +42,6 @@ const CommentCard = ({
           },
         }
       );
-      console.log(updatedCommentReturned);
       if (updatedCommentReturned) {
         window.location.reload();
       }
@@ -49,8 +51,6 @@ const CommentCard = ({
   };
 
   const deleteComment = async (e) => {
-    console.log("delete clicked");
-    console.log(commentId);
     try {
       const deletedComment = await axios.delete(
         `${DEV_API_URL}/comments/${commentId}`,
@@ -73,7 +73,10 @@ const CommentCard = ({
   return (
     <Card className="comment-card-container">
       <div className="comment-photo-container"></div>
-      <img src={profilePhoto} />
+      <img
+        src={profilePhoto}
+        onClick={() => navigate(`/user-account/${commentOwner}`)}
+      />
       <div className="comment-body-container">
         <Card.Body className="card-body">
           <div className="comment-title">

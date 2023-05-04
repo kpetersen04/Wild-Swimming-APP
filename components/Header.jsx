@@ -2,12 +2,13 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavDropdown } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { DEV_API_URL } from "../consts";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [regionsData, setRegionsData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
@@ -64,7 +65,9 @@ const Header = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
                     <NavDropdown title="My Account" id="basic-nav-dropdown">
-                      <NavDropdown.Item as={Link} to={`/my-account/${id}`}>
+                      <NavDropdown.Item
+                        onClick={() => navigate(`/my-account/${id}`)}
+                      >
                         My Prolife
                       </NavDropdown.Item>
                       <NavDropdown.Item as={Link} to={"/"} onClick={signOut}>

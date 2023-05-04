@@ -240,6 +240,7 @@ const SingleSwimSite = () => {
                         isCommentOwner={created_by.id === userId}
                         swimSiteId={swimSite.id}
                         profilePhoto={profile_photo}
+                        commentOwner={created_by.id}
                       />
                     </li>
                   );
