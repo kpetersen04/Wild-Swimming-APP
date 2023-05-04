@@ -72,54 +72,58 @@ const CommentCard = ({
 
   return (
     <Card className="comment-card-container">
-      <Card.Body>
-        <img src={profilePhoto} />
-        <div className="comment-title">
-          <Card.Title>
-            {firstName} {lastName} says:
-          </Card.Title>
-          {showButtons && (
-            <Button
-              variant="outline-secondary"
-              className="_delete-button"
-              onClick={deleteComment}
-            >
-              x
-            </Button>
+      <div className="comment-photo-container"></div>
+      <img src={profilePhoto} />
+      <div className="comment-body-container">
+        <Card.Body className="card-body">
+          <div className="comment-title">
+            <Card.Title>
+              {firstName} {lastName} says:
+            </Card.Title>
+            {showButtons && (
+              <Button
+                variant="outline-secondary"
+                className="_delete-button"
+                onClick={deleteComment}
+              >
+                x
+              </Button>
+            )}
+          </div>
+
+          {isEditing ? (
+            <Form onSubmit={submitUpdatedComment}>
+              <Form.Control
+                className="comment-text-field"
+                type="text"
+                value={updatedComment.text}
+                name="text"
+                onChange={(e) =>
+                  setUpdatedComment({
+                    ...updatedComment,
+                    text: e.target.value,
+                  })
+                }
+              />
+            </Form>
+          ) : (
+            <Card.Text>{text}</Card.Text>
           )}
-        </div>
-        {isEditing ? (
-          <Form onSubmit={submitUpdatedComment}>
-            <Form.Control
-              className="comment-text-field"
-              type="text"
-              value={updatedComment.text}
-              name="text"
-              onChange={(e) =>
-                setUpdatedComment({
-                  ...updatedComment,
-                  text: e.target.value,
-                })
-              }
-            />
-          </Form>
-        ) : (
-          <Card.Text>{text}</Card.Text>
-        )}
-        <Card.Text className="date-stamp-text">
-          Posted on {commentPosted}.{" "}
-          {showButtons && (
-            <Button
-              className="edit-comment-button"
-              variant="link"
-              size="sm"
-              onClick={(e) => setIsEditing(true)}
-            >
-              Edit my comment
-            </Button>
-          )}
-        </Card.Text>
-      </Card.Body>
+          <Card.Text className="date-stamp-text">
+            Posted on {commentPosted}.{" "}
+            {showButtons && (
+              <Button
+                className="edit-comment-button"
+                variant="link"
+                size="sm"
+                onClick={(e) => setIsEditing(true)}
+              >
+                Edit my comment
+              </Button>
+            )}
+          </Card.Text>
+        </Card.Body>
+      </div>
     </Card>
   );
 };
