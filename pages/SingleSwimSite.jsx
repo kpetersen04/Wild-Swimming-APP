@@ -28,24 +28,30 @@ const SingleSwimSite = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
-  const [userFavorites, setUserFavorites] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteId, setFavoriteId] = useState("");
 
   const checkForFavorite = async ({ swimSiteId }) => {
-    console.log(swimSiteId);
-    const user = await axios.get(`${DEV_API_URL}/auth/user/${userId}`);
-    const userFavorites = user.data.favorites;
-    const foundFavorite = userFavorites.filter(
-      (fav) => fav.site.id === swimSiteId
-    );
+    try {
+      const user = await axios.get(`${DEV_API_URL}/auth/user/${userId}`);
+      const userFavorites = user.data.favorites;
+      const foundFavorite = userFavorites.filter(
+        (fav) => fav.site.id === swimSiteId
+      );
 
-    if (foundFavorite.length === 0) {
-      setIsFavorite(false);
-    } else {
-      const favoriteId = foundFavorite[0].id;
-      setFavoriteId(foundFavorite[0].id);
-      setIsFavorite(foundFavorite.length === 1);
+      if (foundFavorite.length === 0) {
+        setIsFavorite(false);
+      } else {
+        const favoriteId = foundFavorite[0].id;
+        setFavoriteId(foundFavorite[0].id);
+        setIsFavorite(foundFavorite.length === 1);
+      }
+      setIsLoading(false);
+      setShowError(false);
+    } catch (err) {
+      setIsLoading(false);
+      setShowError(true);
+      setError("Network Error, please try again later.");
     }
   };
 
@@ -57,12 +63,14 @@ const SingleSwimSite = () => {
         setSwimSiteId(data.id);
         setComments(data.comments);
         setIsLoading(false);
+        setShowError(false);
         if (isLoggedIn) {
-          console.log(data.id);
           checkForFavorite({ swimSiteId: data.id });
         }
       } catch (err) {
-        console.log(err);
+        setIsLoading(false);
+        setShowError(true);
+        setError("Network Error, please try again later.");
       }
     };
     fetchData();
@@ -98,7 +106,7 @@ const SingleSwimSite = () => {
   const deleteFromFavorites = async (e) => {
     try {
       const deletedFavorite = await axios.delete(
-        `${DEV_API_URL}/favorites/${favoriteId}`,
+        `${DEV_API_URL}/favorites/${favoriteId}/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

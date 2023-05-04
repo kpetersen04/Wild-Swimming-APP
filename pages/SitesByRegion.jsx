@@ -11,19 +11,23 @@ const SitesByRegion = () => {
   const [region, setRegion] = useState("");
   const [regionDescription, setRegionDescription] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${DEV_API_URL}/regions/${id}`);
-        console.log(data);
         setRegion(data.region_name);
         setRegionDescription(data.description);
         const swimSites = data.swim_sites;
         setSwimSites(swimSites);
         setIsLoading(false);
+        setShowError(false);
       } catch (err) {
-        console.log(err);
+        setIsLoading(false);
+        setShowError(true);
+        setError("Network Error, please try again later.");
       }
     };
     fetchData();

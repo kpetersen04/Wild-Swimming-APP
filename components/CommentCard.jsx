@@ -53,7 +53,7 @@ const CommentCard = ({
   const deleteComment = async (e) => {
     try {
       const deletedComment = await axios.delete(
-        `${DEV_API_URL}/comments/${commentId}`,
+        `${DEV_API_URL}/comments/${commentId}/`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

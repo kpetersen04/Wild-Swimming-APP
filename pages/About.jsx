@@ -8,24 +8,23 @@ import { Link } from "react-router-dom";
 import LoadingVisual from "../components/LoadingVisual";
 
 const About = () => {
-  const [regions, setRegion] = useState([]);
   const [allSwimSites, setAllSwimSites] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dbresponse = await axios.get(`${DEV_API_URL}/regions/`);
         const { data } = await axios.get(`${DEV_API_URL}/swim-sites/`);
-
         const allSwimSites = data;
+        setShowError(false);
+        setIsLoading(false);
         setAllSwimSites(allSwimSites);
-        console.log(data);
       } catch (err) {
+        setIsLoading(false);
         setShowError(true);
         setError("Network Error, please try again later.");
-        return err;
       }
     };
     fetchData();
@@ -35,8 +34,8 @@ const About = () => {
     <div className="about-page-container">
       <img className="_image" src={Swimmer} />
       <h1 className="_page-title">ABOUT</h1>
-      <body className="_text-body">
-        <h3 className="_heading">What is wild swimming?</h3>
+      <div className="_text-body">
+        <h3>What is wild swimming?</h3>
         <p>
           Wild swimming is simply swimming – or taking a dip – in any of
           nature’s watering holes.
@@ -125,24 +124,24 @@ const About = () => {
           United Kingdom. Here are a few of the fabulous sites are members have
           found.
         </p>
-        {showError ? (
+        {isLoading && (
           <>
             <LoadingVisual />
           </>
+        )}
+        {showError ? (
+          <>
+            <p className="error-response">{error}</p>
+          </>
         ) : (
-          <Carousel style={{ width: "100%" }}>
+          <Carousel className="about-carousel">
             {allSwimSites.map((site) => (
               <Carousel.Item
                 as={Link}
                 to={`/swim-sites/${site.id}`}
                 key={site.id}
               >
-                <img
-                  className="d-block w-100"
-                  height="400px"
-                  src={site.image}
-                  alt="First slide"
-                />
+                <img className="_img" src={site.image} />
                 <Carousel.Caption>
                   <h3>{site.name}</h3>
                   <p>{site.location}</p>
@@ -151,7 +150,7 @@ const About = () => {
             ))}
           </Carousel>
         )}
-      </body>
+      </div>
     </div>
   );
 };

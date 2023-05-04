@@ -3,7 +3,6 @@ import { useState } from "react";
 import axios from "axios";
 import { DEV_API_URL } from "../consts";
 import { useNavigate } from "react-router-dom";
-import Waterfall from "../assets/Waterfall.jpg";
 
 const Register = () => {
   const [registerFormData, setRegisterFormData] = useState({
@@ -21,6 +20,7 @@ const Register = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const [imageURL, setImageURL] = useState("");
+
   const myWidget = cloudinary.createUploadWidget(
     {
       cloudName: "de7f0or8o",
@@ -28,10 +28,9 @@ const Register = () => {
     },
     (error, result) => {
       if (!error && result && result.event === "success") {
-        console.log("Done, here is the image info: ", result.info);
+        // console.log("Done, here is the image info: ", result.info);
         const { url } = result.info;
         setImageURL(url);
-        console.log(url);
         setRegisterFormData({
           ...registerFormData,
           profile_photo: url,
@@ -45,7 +44,6 @@ const Register = () => {
   };
 
   const onChange = (e) => {
-    console.log(e.target.value);
     setRegisterFormData({
       ...registerFormData,
       [e.target.name]: e.target.value,
@@ -54,21 +52,19 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     console.log(registerFormData);
-    console.log("Submit button clicked.");
     e.preventDefault();
     try {
       const response = await axios.post(
         `${DEV_API_URL}/auth/register/`,
         registerFormData
       );
-      console.log(response);
       if (response) {
         navigate(`/sign-in/`);
       }
+      setShowError(false);
     } catch (err) {
-      console.log(err);
-      // setShowError(true);
-      // setError(err.response.statusText);
+      setShowError(true);
+      setError(err.response.statusText);
     }
   };
   return (
