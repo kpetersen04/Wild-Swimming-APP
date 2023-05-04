@@ -84,18 +84,26 @@ const CommentCard = ({
               {firstName} {lastName} says:
             </Card.Title>
             {showButtons && (
-              <Button
-                variant="outline-secondary"
-                className="_delete-button"
-                onClick={deleteComment}
-              >
-                x
-              </Button>
+              <>
+                {!isEditing && (
+                  // This removes the deleteComment button when you are editing your comment
+                  <Button
+                    variant="outline-secondary"
+                    className="_delete-button"
+                    onClick={deleteComment}
+                  >
+                    x
+                  </Button>
+                )}
+              </>
             )}
           </div>
 
           {isEditing ? (
-            <Form className="comment-text" onSubmit={submitUpdatedComment}>
+            <Form
+              className="comment-text with-button"
+              onSubmit={submitUpdatedComment}
+            >
               <Form.Control
                 className="comment-text-field"
                 type="text"
@@ -108,6 +116,13 @@ const CommentCard = ({
                   })
                 }
               />
+              <Button
+                variant="outline-secondary"
+                className="close-update-button"
+                onClick={(e) => setIsEditing(false)}
+              >
+                x
+              </Button>
             </Form>
           ) : (
             <Card.Text className="comment-text">{text}</Card.Text>
