@@ -37,57 +37,60 @@ const Header = () => {
 
   return (
     <>
-      <Navbar sticky="top" bg="dark" variant="dark">
+      <Navbar className="nav-bar" bg="dark" variant="dark" expand="sm">
         <Container>
           <Navbar.Brand as={Link} to={"/"}>
             Wild Swimming
           </Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to={"/about"}>
-              About
-            </Nav.Link>
-            <NavDropdown title="Browse by Region" id="basic-nav-dropdown">
-              {regionsData.map((region, idx) => (
-                <NavDropdown.Item
-                  id={region.id}
-                  href={`/sites-by-region/${region.id}`}
-                  key={idx}
-                >
-                  {region.region_name}
-                </NavDropdown.Item>
-              ))}
-            </NavDropdown>
-          </Nav>
-          <Nav>
-            {isLoggedIn ? (
-              <>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                  <Nav className="me-auto">
-                    <NavDropdown title="My Account" id="basic-nav-dropdown">
-                      <NavDropdown.Item
-                        onClick={() => navigate(`/my-account/${id}`)}
-                      >
-                        My Prolife
-                      </NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to={"/"} onClick={signOut}>
-                        Sign Out
-                      </NavDropdown.Item>
-                    </NavDropdown>
-                  </Nav>
-                </Navbar.Collapse>
-              </>
-            ) : (
-              <>
-                <Nav.Link as={Link} to={"/sign-in"}>
-                  Sign In
-                </Nav.Link>
-                <Nav.Link as={Link} to={"/register"}>
-                  Register
-                </Nav.Link>
-              </>
-            )}
-          </Nav>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link as={Link} to={"/about"}>
+                About
+              </Nav.Link>
+              <NavDropdown title="Browse by Region" id="basic-nav-dropdown">
+                {regionsData.map((region, idx) => (
+                  <NavDropdown.Item
+                    id={region.id}
+                    href={`/sites-by-region/${region.id}`}
+                    key={idx}
+                  >
+                    {region.region_name}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
+            </Nav>
+            <Nav>
+              {isLoggedIn ? (
+                <>
+                  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                  <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                      <NavDropdown title="My Account" id="basic-nav-dropdown">
+                        <NavDropdown.Item
+                          onClick={() => navigate(`/my-account/${id}`)}
+                        >
+                          My Prolife
+                        </NavDropdown.Item>
+                        <NavDropdown.Item as={Link} to={"/"} onClick={signOut}>
+                          Sign Out
+                        </NavDropdown.Item>
+                      </NavDropdown>
+                    </Nav>
+                  </Navbar.Collapse>
+                </>
+              ) : (
+                <>
+                  <Nav.Link as={Link} to={"/sign-in"}>
+                    Sign In
+                  </Nav.Link>
+                  <Nav.Link as={Link} to={"/register"}>
+                    Register
+                  </Nav.Link>
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
