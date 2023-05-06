@@ -49,7 +49,7 @@ const SignInForm = () => {
   };
 
   return (
-    <Form onSubmit={SignIn} className="singIn_form user_forms">
+    <Form onSubmit={SignIn} className="sign-in-form user_forms">
       <h4 className="user_forms_header">Sign In</h4>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
@@ -70,7 +70,7 @@ const SignInForm = () => {
         />
       </Form.Group>
       {showError && <p>{error}</p>}
-      <Button variant="primary" type="submit" className="signIn_button">
+      <Button variant="primary" type="submit" className="sign-in-button">
         Sign In
       </Button>
     </Form>

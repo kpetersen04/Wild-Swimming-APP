@@ -25,13 +25,14 @@
   height: calc(100vh - 56px);
 }
 
-.signIn_button {
+.sign-in-button {
   margin-top: 30px;
 }
 
 // Register Page styling
 .register-page {
   background-image: url("../assets/Waterfall.jpg");
+  background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
   justify-content: left;
@@ -42,7 +43,6 @@
 
 .register_form_container {
   margin-left: 10%;
-  margin-top: 25px;
 
   .form-label {
     margin-bottom: 0;
@@ -50,6 +50,8 @@
 }
 .register-form {
   height: 770px;
+  margin-top: 125px;
+  margin-bottom: 50px;
   background-color: white;
 }
 
@@ -75,5 +77,53 @@
   ._upload-button:hover {
     background-color: #0b5ed7;
     color: white;
+  }
+}
+
+// Sign In Styling
+@media (max-width: 575px) {
+  .sign-in-form {
+    margin: 20px 55px 40px 55px;
+    min-width: 300px;
+    height: 310px;
+    padding-top: 20px;
+  }
+
+  .sign-in-button {
+    margin-top: 10px;
+  }
+}
+
+// Register Styling
+@media (max-width: 575px) {
+  .register_form_container {
+    margin-left: 0;
+    margin: auto;
+
+    .register-form {
+      margin-top: 50px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .register_form_container {
+    .register-form {
+      font-size: 15px;
+      max-width: 375px;
+      padding: 30px;
+      // min-width: 300px;
+      // margin: 50px 10px 50px 10px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .register_form_container {
+    .register-form {
+      font-size: 15px;
+      max-width: 325px;
+      padding: 20px;
+    }
   }
 }

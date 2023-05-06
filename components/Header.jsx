@@ -63,21 +63,23 @@ const Header = () => {
             <Nav>
               {isLoggedIn ? (
                 <>
-                  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                  <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                      <NavDropdown title="My Account" id="basic-nav-dropdown">
-                        <NavDropdown.Item
-                          onClick={() => navigate(`/my-account/${id}`)}
-                        >
-                          My Prolife
-                        </NavDropdown.Item>
-                        <NavDropdown.Item as={Link} to={"/"} onClick={signOut}>
-                          Sign Out
-                        </NavDropdown.Item>
-                      </NavDropdown>
-                    </Nav>
-                  </Navbar.Collapse>
+                  {/* <Container> */}
+                  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav"> */}
+                  <Nav className="me-auto">
+                    <NavDropdown title="My Account" id="basic-nav-dropdown">
+                      <NavDropdown.Item
+                        onClick={() => navigate(`/my-account/${id}`)}
+                      >
+                        My Prolife
+                      </NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to={"/"} onClick={signOut}>
+                        Sign Out
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
+                  {/* </Navbar.Collapse> */}
+                  {/* </Container> */}
                 </>
               ) : (
                 <>

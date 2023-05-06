@@ -53,3 +53,28 @@
   display: flex;
   justify-content: center;
 }
+
+// MyAccount styling
+@media (max-width: 900px) {
+  .user-bio-container {
+    flex-direction: column-reverse;
+
+    ._bio-text,
+    ._profile-picture {
+      width: 100%;
+    }
+
+    ._profile-picture {
+      border: 10px solid black;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .user-bio-container {
+    ._bio-text {
+      font-size: 18px;
+    }
+  }
+}
