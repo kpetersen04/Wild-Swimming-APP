@@ -14,7 +14,7 @@ const Header = () => {
   const location = useLocation();
   const id = localStorage.getItem("userId");
 
-  const fetchData = async () => {
+  const fetchData = async (e) => {
     try {
       const dbresponse = await axios.get(`${DEV_API_URL}/regions/`);
       const regionsInfo = dbresponse.data;
@@ -25,7 +25,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
     setIsLoggedIn(localStorage.getItem("token") ? true : false);
   }, [location]);
 
@@ -48,7 +48,11 @@ const Header = () => {
               <Nav.Link as={Link} to={"/about"}>
                 About
               </Nav.Link>
-              <NavDropdown title="Browse by Region" id="basic-nav-dropdown">
+              <NavDropdown
+                title="Browse by Region"
+                id="basic-nav-dropdown"
+                onClick={fetchData}
+              >
                 {regionsData.map((region, idx) => (
                   <NavDropdown.Item
                     id={region.id}

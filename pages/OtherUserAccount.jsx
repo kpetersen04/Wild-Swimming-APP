@@ -17,7 +17,7 @@ const OtherUserAccount = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DEV_API_URL}/auth/user/${id}`);
+        const { data } = await axios.get(`${DEV_API_URL}/auth/user/${id}/`);
         setUser(data);
         const favorites = data.favorites;
         setShowError(false);

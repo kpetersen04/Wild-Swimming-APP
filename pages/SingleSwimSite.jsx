@@ -191,7 +191,7 @@ const SingleSwimSite = () => {
               </span>
             )}
           </div>
-          {showError && (
+          {/* {showError && (
             <Card.Text className="error-container">
               {error}
               <Button
@@ -202,7 +202,7 @@ const SingleSwimSite = () => {
                 x
               </Button>
             </Card.Text>
-          )}
+          )} */}
 
           <DetailedSwimSiteCard swimSite={swimSite} />
           <div className="comments-section">
