@@ -2,3 +2,7 @@
   position: sticky;
   min-height: 80px;
 }
+
+.dropdown-menu {
+  z-index: 1000;
+}
