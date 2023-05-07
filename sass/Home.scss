@@ -14,10 +14,9 @@
     padding: 10px;
     font-weight: 300;
     font-size: 20px;
-    position: relative;
-    top: 15%;
-    left: 7%;
-    max-width: 25%;
+    margin-left: 100px;
+    margin-top: 75px;
+    width: 275px;
   }
 
   .error-response {
@@ -33,6 +32,7 @@
     ._text-body {
       min-width: 300px;
       margin: auto;
+      margin-top: 75px;
       background-color: rgb(195, 190, 190);
 
       & p {

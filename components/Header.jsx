@@ -38,7 +38,7 @@ const Header = () => {
   return (
     <>
       <Navbar className="nav-bar" bg="dark" variant="dark" expand="sm">
-        <Container>
+        <Container className="nav-bar-container">
           <Navbar.Brand as={Link} to={"/"}>
             Wild Swimming
           </Navbar.Brand>
@@ -49,12 +49,14 @@ const Header = () => {
                 About
               </Nav.Link>
               <NavDropdown
+                className="dropdown-title"
                 title="Browse by Region"
                 id="basic-nav-dropdown"
                 onClick={fetchData}
               >
                 {regionsData.map((region, idx) => (
                   <NavDropdown.Item
+                    className="dropdown-items"
                     id={region.id}
                     href={`/sites-by-region/${region.id}/`}
                     key={idx}
@@ -67,9 +69,6 @@ const Header = () => {
             <Nav>
               {isLoggedIn ? (
                 <>
-                  {/* <Container> */}
-                  {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav"> */}
                   <Nav className="me-auto">
                     <NavDropdown title="My Account" id="basic-nav-dropdown">
                       <NavDropdown.Item
@@ -82,8 +81,6 @@ const Header = () => {
                       </NavDropdown.Item>
                     </NavDropdown>
                   </Nav>
-                  {/* </Navbar.Collapse> */}
-                  {/* </Container> */}
                 </>
               ) : (
                 <>

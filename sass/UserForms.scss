@@ -37,11 +37,11 @@
   background-repeat: no-repeat;
   justify-content: left;
   height: calc(100vh - 56px);
-  min-height: 800px;
   overflow: auto;
 }
 
 .register_form_container {
+  margin-top: 225px;
   margin-left: 10%;
 
   .form-label {
@@ -50,7 +50,6 @@
 }
 .register-form {
   height: 770px;
-  margin-top: 125px;
   margin-bottom: 50px;
   background-color: white;
 }
