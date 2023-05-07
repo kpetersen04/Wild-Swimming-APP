@@ -17,7 +17,7 @@ const SitesByRegion = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DEV_API_URL}/regions/${id}`);
+        const { data } = await axios.get(`${DEV_API_URL}/regions/${id}/`);
         setRegion(data.region_name);
         setRegionDescription(data.description);
         const swimSites = data.swim_sites;
@@ -32,7 +32,6 @@ const SitesByRegion = () => {
     };
     fetchData();
   }, []);
-
   return (
     <div>
       <h1 className="standard-heading">{region}</h1>

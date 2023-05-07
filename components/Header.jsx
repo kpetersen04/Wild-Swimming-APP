@@ -52,7 +52,7 @@ const Header = () => {
                 {regionsData.map((region, idx) => (
                   <NavDropdown.Item
                     id={region.id}
-                    href={`/sites-by-region/${region.id}`}
+                    href={`/sites-by-region/${region.id}/`}
                     key={idx}
                   >
                     {region.region_name}

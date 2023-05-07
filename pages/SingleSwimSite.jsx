@@ -33,7 +33,7 @@ const SingleSwimSite = () => {
 
   const checkForFavorite = async ({ swimSiteId }) => {
     try {
-      const user = await axios.get(`${DEV_API_URL}/auth/user/${userId}`);
+      const user = await axios.get(`${DEV_API_URL}/auth/user/${userId}/`);
       const userFavorites = user.data.favorites;
       const foundFavorite = userFavorites.filter(
         (fav) => fav.site.id === swimSiteId
