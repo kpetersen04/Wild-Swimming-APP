@@ -25,7 +25,6 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // fetchData();
     setIsLoggedIn(localStorage.getItem("token") ? true : false);
   }, [location]);
 
@@ -39,13 +38,13 @@ const Header = () => {
     <>
       <Navbar className="nav-bar" bg="dark" variant="dark" expand="sm">
         <Container className="nav-bar-container">
-          <Navbar.Brand as={Link} to={"/"}>
+          <Navbar.Brand as={Link} to={"/"} onClick="hide.bs.dropdown">
             Wild Swimming
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to={"/about"}>
+              <Nav.Link as={Link} to={"/about"} onClick="hide.bs.dropdown">
                 About
               </Nav.Link>
               <NavDropdown
@@ -57,6 +56,7 @@ const Header = () => {
                 {regionsData.map((region, idx) => (
                   <NavDropdown.Item
                     className="dropdown-items"
+                    onClick="hide.bs.dropdown"
                     id={region.id}
                     href={`/sites-by-region/${region.id}/`}
                     key={idx}
@@ -84,10 +84,18 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <Nav.Link as={Link} to={"/sign-in"}>
+                  <Nav.Link
+                    as={Link}
+                    to={"/sign-in"}
+                    onClick="hide.bs.dropdown"
+                  >
                     Sign In
                   </Nav.Link>
-                  <Nav.Link as={Link} to={"/register"}>
+                  <Nav.Link
+                    as={Link}
+                    to={"/register"}
+                    onClick="hide.bs.dropdown"
+                  >
                     Register
                   </Nav.Link>
                 </>
