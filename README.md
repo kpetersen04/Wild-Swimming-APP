@@ -8,7 +8,8 @@ This repo contains code for the front end client only. Code for the back end api
 
 View the [deployed application](https://wild-swimming.netlify.app/)!
 
-- Create a new account and use your own login credentials or try a demo one:
+Create a new account and use your own login credentials or try a demo one:
+
 - Username: katie@gmail.com
 - Password: 12345678!
 
@@ -102,13 +103,13 @@ And here you can see the final version, which was updated as I built my applicat
 
 The back end of my application was built using Python and Django Rest Framework. It includes five models - Swim site, Region, Favorite, Comment and User. By using PopulatedSerializers across these models I was able to link them together, allowing me to get information for separate models by using a get request only on one. For example by creating a PopulatedUserSerializer that contained comments and favorites, I could access the details for these two additional Models when using a get request just for the User.
 
-```
-class PopulatedFavoriteSerializer(FavoriteSerializer):
-    created_by = UserSerializer()
-    site = Swim_siteSerializer()
+```JavaScript
+class PopulatedUserSerializer(UserSerializer):
+    comments = CommentSerializer(many=True)
+    favorites = PopulatedFavoriteSerializer(many=True)
 ```
 
-```
+```JavaScript
 class UserDetailView(APIView):
 
     def get_user(self, pk):
@@ -131,7 +132,7 @@ By filtering the Favorite objects with .first(), the first Favorite object found
 
 If the site doesn't already exist within the user's favorites and the required data is included in the POST request to this view then a new Favorite object is created and saved for the user.
 
-```
+```JavaScript
 class FavoriteListView(APIView):
     permission_classes = (IsAuthenticated, )
     def post(self, request):
@@ -165,13 +166,13 @@ One of the sections I enjoyed working on the most was the comments section of a 
 </p>
 The alternative view is displayed when the showButtons state is set to true. This is done by checking whether the user is confirmed as the CommentOwner. A CommentOwner is determined by checking whether the created_by.id from the comments data and the userId which is stored in local Storage match.
 
-```
+```JavaScript
   const [showButtons, setShowButtons] = useState(isCommentOwner);
 ```
 
 If the showButtons state is set to true, the following code allows the delete comment button to appear.
 
-```
+```JavaScript
    <div className="comment-title">
           <Card.Title>
             {firstName} {lastName} says:
@@ -195,7 +196,7 @@ If the showButtons state is set to true, the following code allows the delete co
 
 In a separate section of the comment card, the showButton state that has a value of true would allow the 'Edit my comment' button to be displayed. By doing this, only the user who created the comment is able to update and/or delete their own comment.
 
-```
+```JavaScript
 <Card.Text className="date-stamp-text">
             Posted on {commentPosted}.{" "}
             {showButtons && (
@@ -215,7 +216,7 @@ Included within the first showButtons code above (starts with a div with a class
 
 This is because when the idEditing state is set to true, the below code is included in the comment card which allows the user to update their comment text. If they decide they don't want to update the text after pressing 'Edit my comment' the new 'close-update-button' that appears to the right of the text will allow the user to exit the update without making any changes. The onClick callback function also updates the isEditing state back to false, meaning that the delete comment button will re-appear.
 
-```
+```JavaScript
 {isEditing ? (
             <Form
               className="comment-text with-button"
@@ -250,7 +251,7 @@ Another aspect of my code which I was quite proud of is managing the favoriting 
 
 To ensure a site was showing as a favorite when required, I included a separate function within the fetchData function that would set the value of the swimSiteId to data.id.
 
-```
+```JavaScript
    if (isLoggedIn) {
           checkForFavorite({ swimSiteId: data.id });
         }
@@ -258,7 +259,7 @@ To ensure a site was showing as a favorite when required, I included a separate 
 
 The swimSiteId was then passed to the check ForFavorite function as an argument. The userFavorites was then filtered for any object where the fav.site.id matched the swimSiteId.
 
-```
+```JavaScript
   const checkForFavorite = async ({ swimSiteId }) => {
     try {
       const user = await axios.get(`${DEV_API_URL}/auth/user/${userId}/`);
@@ -286,7 +287,7 @@ The swimSiteId was then passed to the check ForFavorite function as an argument.
 
 If the foundFavorite variable had a length of one then the setIsFavorite state was updated to true and the heart would be styled with the '\_current-favorite' class giving it a red outline, if it wasn't a favorite it would appear outlined in gray.
 
-```
+```JavaScript
 {isFavorite ? (
               <span
                 className=" _heart _current-favorite"
@@ -319,7 +320,7 @@ The onChange function took the initial reigisterFormData and spread the new cont
 
 If there is no file included then the value of the profile_photo property is left as it was assigned in its original state.
 
-```
+```JavaScript
   const onChange = (e) => {
     console.log(e.target.value);
     setRegisterFormData({
@@ -335,7 +336,7 @@ If there is no file included then the value of the profile_photo property is lef
 
 I then used a POST request to the database with the updated regsiterFormData , including a Content-Type "multipart/form-data" in the headers that was also posted.
 
-```
+```JavaScript
 const response = await axios.post(
         `${DEV_API_URL}/auth/register/`,
         registerFormData,
@@ -351,7 +352,7 @@ In doing this I was able to upload a profile photo and save it locally to my bac
 
 To resolve this, I ended up using Cloudinary, a cloud-based image and video management service. By changing the onClick on my profile_photo upload button to the following function:
 
-```
+```JavaScript
   const uploadPhoto = (e) => {
     myWidget.open();
   };
@@ -363,7 +364,7 @@ A callback function is then used when the upload is completed. If an error occur
 
 I then used the returned url to set the value of the ImageURL and then updated the registerFormData so that the value of the profile_photo property was the returned url.
 
-```
+```JavaScript
  const myWidget = cloudinary.createUploadWidget(
     {
       cloudName: "de7f0or8o",
