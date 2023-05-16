@@ -103,13 +103,13 @@ And here you can see the final version, which was updated as I built my applicat
 
 The back end of my application was built using Python and Django Rest Framework. It includes five models - Swim site, Region, Favorite, Comment and User. By using PopulatedSerializers across these models I was able to link them together, allowing me to get information for separate models by using a get request only on one. For example by creating a PopulatedUserSerializer that contained comments and favorites, I could access the details for these two additional Models when using a get request just for the User.
 
-```JavaScript
+```Python
 class PopulatedUserSerializer(UserSerializer):
     comments = CommentSerializer(many=True)
     favorites = PopulatedFavoriteSerializer(many=True)
 ```
 
-```JavaScript
+```Python
 class UserDetailView(APIView):
 
     def get_user(self, pk):
@@ -132,7 +132,7 @@ By filtering the Favorite objects with .first(), the first Favorite object found
 
 If the site doesn't already exist within the user's favorites and the required data is included in the POST request to this view then a new Favorite object is created and saved for the user.
 
-```JavaScript
+```Python
 class FavoriteListView(APIView):
     permission_classes = (IsAuthenticated, )
     def post(self, request):
@@ -180,7 +180,6 @@ If the showButtons state is set to true, the following code allows the delete co
           {showButtons && (
             <>
               {!isEditing && (
-                // This removes the deleteComment button when you are editing your comment
                 <Button
                   variant="outline-secondary"
                   className="_delete-button"
