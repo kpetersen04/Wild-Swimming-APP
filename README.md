@@ -4,15 +4,6 @@ This was a solo project completed over a three week period. I built a full stack
 
 This repo contains code for the front end client only. Code for the back end api can be found [here](https://github.com/kpetersen04/Wild-Swimming-API).
 
-## The Deployed Application
-
-View the [deployed application](https://wild-swimming.netlify.app/)!
-
-Create a new account and use your own login credentials or try a demo one:
-
-- Username: katie@gmail.com
-- Password: 12345678!
-
 ## Application Visuals
 
 <p align="center">
